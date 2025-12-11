@@ -8,6 +8,32 @@
 /* navbar */
 .navbar {
   padding: 2rem 0rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.navbar .flex-row {
+  gap: 1.5rem;
+}
+
+@media (max-width: 576px) {
+  .navbar {
+    padding: 1.5rem 0rem;
+  }
+  
+  .navbar .flex-row {
+    gap: 1rem;
+  }
+  
+  .navbar-brand {
+    font-size: 0.9rem;
+  }
+  
+  .brand-subtitle {
+    display: none;
+  }
 }
 
 
@@ -76,4 +102,21 @@ span{
     max-width: 800px; /* Adjust the max width as needed */
     margin: 0 auto; /* Center the container */
     padding: 0 1.5rem; /* Add padding on both sides */
+}
+/* Alternating project layout - CSS only */
+.container:nth-of-type(2n+1) .row {
+    display: flex;
+    flex-direction: row;
+}
+
+.container:nth-of-type(2n) .row {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+/* On mobile, always show text first, then image */
+@media (max-width: 576px) {
+    .container:nth-of-type(2n) .row {
+        flex-direction: row;
+    }
 }
