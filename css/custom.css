@@ -1,7 +1,8 @@
-/* Custom Alex CSS
-*/
+/* Custom Alex CSS */
 
 :root {
+  --brand-green: #00aa00;
+  --bs-success: var(--brand-green);
   --space-3xs: 0.25rem;
   --space-2xs: 0.375rem;
   --space-xs: 0.5rem;
@@ -81,7 +82,7 @@
   }
 }
 
-.more-projects .card-title { color: var(--bs-success); text-align: center; min-height: 3rem; display: flex; align-items: flex-start; justify-content: center; }
+.more-projects .card-title { color: var(--brand-green); text-align: center; min-height: 3rem; display: flex; align-items: flex-start; justify-content: center; }
 .more-projects .card-img-top { display: block; width: 100%; height: 200px; object-fit: cover; object-position: center; }
 .more-projects a.text-decoration-none:hover .card-title { text-decoration: underline; }
 
@@ -94,33 +95,56 @@
 
 /* navbar */
 .navbar {
-  padding: var(--space-xl) 0;
+  /* More top space */
+  padding: var(--space-2xl) 0 var(--space-xl);
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+  /* Sticky menu */
+  position: sticky;
+  top: 0;
+  z-index: 1020; /* above content */
+  background-color: transparent !important; /* transparent sticky navbar */
+  box-shadow: none;
 }
 
-.navbar .flex-row {
-  gap: var(--space-lg);
+/* Brand responsive labels */
+.navbar .brand-short { display: none; }
+.navbar .brand-full { display: inline; }
+
+/* Make brand link inherit color and remove underline */
+.navbar .navbar-brand { color: inherit; text-decoration: none; }
+
+/* Desktop: brand and subtitle in primary green */
+@media (min-width: 577px) {
+  .navbar .brand-full { color: var(--brand-green); }
+  .navbar .brand-subtitle { color: var(--brand-green); }
 }
+
+/* Horizontal spacing between menu items */
+.navbar-nav.flex-row { gap: var(--space-xl); }
 
 @media (max-width: 576px) {
   .navbar {
-    padding: var(--space-lg) 0;
+    padding: var(--space-xl) 0 var(--space-lg);
   }
   
-  .navbar .flex-row {
-    gap: var(--space-md);
-  }
-  
-  .navbar-brand {
-    font-size: 0.9rem;
-  }
-  
-  .brand-subtitle {
-    display: none;
-  }
+  /* Slightly tighter spacing on small screens */
+  .navbar-nav.flex-row { gap: var(--space-md); }
+  .navbar .nav-link { padding: 0.25rem 0.5rem; }
+
+  /* Mobile brand: show short, hide full and subtitle */
+  .navbar .brand-short { display: inline; }
+  .navbar .brand-full, .navbar .brand-subtitle { display: none; }
+
+  /* Ensure space to next section when navbar is sticky and transparent */
+  body > .container:first-of-type { margin-bottom: var(--space-lg); }
+}
+
+/* Desktop spacing below transparent sticky navbar */
+@media (min-width: 577px) {
+  body > .container:first-of-type { margin-bottom: var(--space-xl); }
 }
 
 
@@ -152,10 +176,10 @@ p{
 }
 
 span{
-  color: #00aa00;
+  color: var(--brand-green);
 }
 
-.row {
+body.projects-list .row {
 	--row-gap-y: var(--space-2xl);
 	--row-gap-x: var(--space-xl);
 	--bs-gutter-y: var(--row-gap-y);
@@ -164,23 +188,23 @@ span{
 	margin-bottom: 0;
 }
 
-.row + .row {
+body.projects-list .row + .row {
   margin-top: var(--space-lg);
 }
 
 @media (max-width: 768px) {
-  .row {
+  body.projects-list .row {
     --row-gap-y: var(--space-lg);
     --row-gap-x: var(--space-md);
   }
 }
 
 @media (max-width: 576px) {
-  .row {
+  body.projects-list .row {
     --row-gap-y: var(--space-xs);
   }
 
-  .row > [class*="col-"] {
+  body.projects-list .row > [class*="col-"] {
     padding-top: 0 !important;
   }
 }

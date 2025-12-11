@@ -1,52 +1,61 @@
-// Load navbar.html into all pages
+// Load unified navbar.html into all pages with root-relative links
 document.addEventListener('DOMContentLoaded', function() {
-  // Get current page filename
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  
-  // Determine the correct path to navbar file based on current page depth
-  let navbarPath = 'navbar.html';
-  
-  // Use special navbar for about page
-  if (currentPage === 'about.html') {
-    navbarPath = 'navbar-about.html';
-  }
-  
-  // If we're in a subdirectory (like projects/grand-paris/), adjust the path
-  if (window.location.pathname.includes('/projects/')) {
-    navbarPath = '../../navbar-nested.html';
-  }
-  
-  // Fetch and inject the navbar
+  const navbarPath = '/navbar.html';
+
   fetch(navbarPath)
     .then(response => {
-      if (!response.ok) {
-        throw new Error('Failed to load navbar');
-      }
+      if (!response.ok) throw new Error('Failed to load navbar');
       return response.text();
     })
     .then(html => {
       const navContainer = document.getElementById('navbar-container');
-      if (navContainer) {
-        navContainer.innerHTML = html;
-        
-        // Highlight current page in navbar
-        highlightCurrentPage();
+      if (!navContainer) return;
+      navContainer.innerHTML = html;
+
+      // Conditionally add Photography link only on About page
+      if (isAboutPage()) {
+        insertPhotographyLink();
       }
+
+      highlightCurrentPage();
     })
-    .catch(error => {
-      console.error('Error loading navbar:', error);
-    });
+    .catch(error => console.error('Error loading navbar:', error));
 });
 
-// Function to add active class to current page link
+function isAboutPage() {
+  const path = window.location.pathname;
+  return path.endsWith('/about.html') || path === '/about.html';
+}
+
+function insertPhotographyLink() {
+  const aboutItem = document.getElementById('about-link-item');
+  if (!aboutItem) return;
+
+  const li = document.createElement('li');
+  li.className = 'nav-item';
+  const a = document.createElement('a');
+  a.className = 'nav-link';
+  a.href = '/photo_book.html';
+  a.textContent = 'Photography';
+  li.appendChild(a);
+
+  // Insert before About link
+  aboutItem.parentNode.insertBefore(li, aboutItem);
+}
+
+// Function to add active class to current page link (root-relative aware)
 function highlightCurrentPage() {
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const currentPath = window.location.pathname || '/index.html';
   const navLinks = document.querySelectorAll('.navbar-nav a.nav-link');
-  
+
   navLinks.forEach(link => {
-    const href = link.getAttribute('href');
-    if (href === currentPage || (currentPage === '' && href === 'index.html')) {
-      link.classList.add('active');
+    try {
+      const linkPath = new URL(link.href, window.location.origin).pathname || '/index.html';
+      if (linkPath === currentPath || (currentPath === '/' && linkPath === '/index.html')) {
+        link.classList.add('active');
+      }
+    } catch (e) {
+      // Ignore malformed URLs
     }
   });
 }
