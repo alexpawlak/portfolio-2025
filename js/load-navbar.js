@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // If we're in a subdirectory (like projects/grand-paris/), adjust the path
   if (window.location.pathname.includes('/projects/')) {
-    navbarPath = '../../navbar.html';
+    navbarPath = '../../navbar-nested.html';
   }
   
   // Fetch and inject the navbar
