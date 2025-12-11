@@ -73,6 +73,27 @@ span{
 	margin-bottom: 2rem;
 }
 
+@media (max-width: 768px) {
+  .row {
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .container.mt-4 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .col-sm-4.flex-column.pt-3,
+  .col-sm-8.pt-3 {
+    padding-top: 0.75rem;
+  }
+
+  .col-sm-4.flex-column.pt-3:first-child {
+    padding-top: 0;
+  }
+}
+
 .btn {
 	margin-top: 0rem;
 	margin-bottom: 0rem;
