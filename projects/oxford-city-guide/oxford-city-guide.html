@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../css/custom.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/favicon.svg">
+    <title>Alexandre Pawlak Portfolio - Oxford City Guide</title>
+  </head>
+  <body>
+    <div class="container">
+      <div id="navbar-container"></div>
+    </div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-6">
+      <h1>Oxford City Guide – Design Case Study</h1>
+      <p>Designing a trustworthy, offline-capable city guide for diverse audiences.</p>
+    </div>
+    <div class="col-sm-2 text-right">
+      <!--<h6>2024–2025</h6>-->
+      <span class="badge badge-secondary">Role : Lead Product Designer</span>
+      <span class="badge badge-secondary">Client: Oxford City Guide</span>
+    </div>
+    <div class="col-sm-2"></div>
+    <div><img src="../../images/photos/portraits/oxford-city-guide/oxford-city-guide.png" class="img-fluid" alt="Oxford City Guide"></div>
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+      <h2>Project Overview</h2>
+      <p><strong>Client:</strong> Oxford City Guide (tourism + education partners)</p>
+      <p><strong>Role:</strong> Lead Product Designer (end-to-end UX/UI, research, prototyping, design system, handoff)</p>
+      <p><strong>Duration:</strong> Multi-phase 2024–2025 (refactor stabilization → iOS launch readiness)</p>
+      <p><strong>Team:</strong> Cross-functional squad (Flutter engineers, QA, content, data); designer embedded with PM/engineering</p>
+      <p><strong>Tools & Methods:</strong> Figma, Flutter UI reviews, moderated/unmoderated tests, localization/accessibility audits, design system tokens, telemetry pairing</p>
+      <p><strong>Project Scale:</strong> Multilingual mobile app (iOS/Android) serving tourists, students, academics; hundreds of POIs/tours; offline-first</p>
+
+      <h2>Challenge & Context</h2>
+      <p>Deliver a trustworthy, offline-capable city guide for diverse audiences while aligning with Apple HIG and privacy expectations. The inherited UI had monolithic flows (tour start/exit), inconsistent spacing/terminology, and weak offline/permission clarity. Map/tour flows relied on implicit behaviors (auto-start, ambiguous exit), audio failed silently, and “offline” was unproven. We needed to modernize the experience without breaking existing functionality and prepare for App Store/Play review with privacy-safe patterns.</p>
+
+      <h2>Project Goals</h2>
+      <ul>
+        <li>Make tour discovery/start/exit obvious and fast (target: cut time-to-first-tour by 30% in testing).</li>
+        <li>Build trust in offline mode and privacy (target: increase “offline confidence” self-report; reduce permission denies).</li>
+        <li>Improve audio/TTS usability (quality, fallbacks, transcripts/highlight; target: reduce audio error dead-ends to near-zero).</li>
+        <li>Ensure localization/accessibility readiness (en/ja/fr, dynamic type, contrast, tap targets; target: pass accessibility runs without blocking issues).</li>
+        <li>Provide design system consistency to ship faster and reduce regressions (tokens/components mapped to Flutter).</li>
+      </ul>
+
+      <h2>Key Focus Areas / Research Questions</h2>
+      <ul>
+        <li>What convinces users offline actually works (proof flows, download sizing, test snippets)?</li>
+        <li>How should tour start/exit feel across entry points (auto vs manual; preload vs immediate)?</li>
+        <li>What audio behaviors (speed, fallback, transcripts) keep users engaged despite network drops?</li>
+        <li>How do permission prompts and privacy copy affect adoption and denial rates?</li>
+        <li>Which UI terms resonate (e.g., “places” vs “POIs”) across languages; how to show translation coverage?</li>
+      </ul>
+
+      <h2>User Research & Discovery</h2>
+      <p><strong>Research Methods:</strong> Moderated usability (tour start/exit, offline packs, audio fallback), unmoderated tasks (start/exit microflows), field tests on spotty networks/airplane mode, accessibility runs (large text, screen reader, outdoor contrast), localization checks (en/ja/fr permission copy, translation coverage).</p>
+      <p><strong>Participants:</strong> Tourists, students, academics/locals; bilingual participants for JP/FR; mixed device/OS.</p>
+      
+      <h3>Key User Profiles</h3>
+      <ul>
+        <li><strong>Tourists:</strong> Needing quick curated loops.</li>
+        <li><strong>Students:</strong> On 1-hour breaks.</li>
+        <li><strong>Academics:</strong> Seeking depth/credibility.</li>
+        <li><strong>International families:</strong> Needing bilingual/offline reliability.</li>
+      </ul>
+
+      <h3>User Insights & Synthesis</h3>
+      <p>Patterns: offline mistrust without proof; desire for fast, manual tour start with clear preload; need for audio quality + graceful fallback; preference for plain-language permissions; terminology simplicity; translation coverage transparency.</p>
+      <blockquote class="blockquote">
+        <p>"I won’t believe offline until I can test it in 30 seconds—show me it works before I travel."</p>
+      </blockquote>
+      <ul>
+        <li><strong>Pain Point 1:</strong> Unclear tour start/exit → explicit Start, preload indicator, tour-aware centering; Exit with save-progress + quick feedback; Resume entry point.</li>
+        <li><strong>Pain Point 2:</strong> Offline claims doubted → download size/time + offline test card; partial-offline transparency (map/text vs audio/images).</li>
+        <li><strong>Pain Point 3:</strong> Audio failures kill trust → visible fallback to device TTS with text highlight/transcript and speed control; error states surfaced.</li>
+        <li><strong>Pain Point 4:</strong> Permission fatigue → single well-timed prompt with on-device copy; optional background with stated benefit only.</li>
+      </ul>
+
+      <h2>Core Customer Needs</h2>
+      <ul>
+        <li><strong>Reliable guidance offline:</strong> Downloadable packs with proof and recaps; no surprise network dependency; size/time transparency.</li>
+        <li><strong>Clarity and control:</strong> Clear Start/Exit, resume, manual override when GPS wobbles; skip/reorder stops.</li>
+        <li><strong>Accessible, localized storytelling:</strong> Dynamic text, high contrast, multilingual content/audio; translation coverage indicator; transcripts.</li>
+      </ul>
+
+      <h2>Design Process & Approach</h2>
+      <ol>
+        <li><strong>Discovery/Definition:</strong>
+           <ul>
+             <li>Audited navigation, permissions, offline flows; mapped pain points to events/metrics.</li>
+             <li>Defined personas/journeys; set success criteria (time-to-start, offline pass rate, audio fallback success).</li>
+             <li>Identified terminology, spacing, and HIG alignment gaps; cataloged accessibility risks.</li>
+           </ul>
+        </li>
+        <li><strong>Ideation/Design:</strong>
+           <ul>
+             <li>Prototyped tour start/exit, offline pack UI, permission copy variants, audio controls/fallback states.</li>
+             <li>Designed translation coverage indicators, accessibility overlays (step-free hints), map chrome (scale bar, distance units).</li>
+             <li>Built design system tokens/components in Figma aligned to Flutter widgets.</li>
+           </ul>
+        </li>
+        <li><strong>Testing/Iteration:</strong>
+           <ul>
+             <li>Moderated tests with forced network drops and GPS wobble; unmoderated tasks for Start/Exit; localization/accessibility runs.</li>
+             <li>Iterated copy, fallback visibility, preload indicators, and Exit/Resume flows; simplified jargon.</li>
+           </ul>
+        </li>
+      </ol>
+
+      <h2>Solution & Key Features</h2>
+      
+      <h3>Tour Flow Clarity</h3>
+      <ul>
+        <li>Prominent Start with preload indicator; tour-aware centering; manual override when GPS wobbles.</li>
+        <li>Exit with save-progress + 2-tap feedback; Resume surface in app and via notification.</li>
+        <li>Reorder/skip stops for advanced users; recap at completion (stops visited, badge/share).</li>
+      </ul>
+
+      <h3>Offline Proof & Control</h3>
+      <ul>
+        <li>Download cards with size/time estimates; offline test card; pack status and partial-offline transparency (map/text vs audio/images).</li>
+        <li>Pack chooser for “essentials” vs full (planned); last-updated timestamp to build trust.</li>
+      </ul>
+
+      <h3>Audio & Accessibility</h3>
+      <ul>
+        <li>Engine selection (studio/device); speed control; transcripts/highlight-as-you-listen.</li>
+        <li>Fallback path visible (studio -> device TTS) with user-friendly errors; language toggle and translation coverage indicator.</li>
+        <li>Larger tap targets, contrast tokens, dynamic type-friendly layouts.</li>
+      </ul>
+
+      <h2>Visual Design</h2>
+      <ul>
+        <li><strong>Design System:</strong> Tokens for spacing/typography/colors; component variants for buttons/cards/dialogs; map chrome (scale bar, distance units) aligned; permission banners and status toasts included.</li>
+        <li><strong>Key UI Components:</strong> Tour cards with ETA/stop count and translation coverage; Start/Exit modals; offline pack cards with size/time/offline test; audio controls with fallback state; permission explainer banners.</li>
+        <li><strong>Visual Decisions:</strong> High contrast for outdoor use; concise, plain-language copy; minimized jargon (“places” not “POIs”); consistent spacing; clear loading/preload affordances.</li>
+      </ul>
+
+      <!--
+      <h3>Desktop Screens</h3>
+      <p>[PLACEHOLDER FOR IMAGES: map + tour selection + offline pack management]</p>
+
+      <h3>Mobile/Responsive Designs</h3>
+      <p>[PLACEHOLDER FOR IMAGES: tour start/exit, audio controls, permission prompt, offline test]</p>
+      -->
+
+      <h2>Design System & Documentation</h2>
+      <ul>
+        <li><strong>Tools:</strong> Figma library with tokens; component specs mapped to Flutter widgets; asset usage guidelines.</li>
+        <li><strong>Organization:</strong> Primitives (color/spacing/typography) → controls (buttons/forms/cards/dialogs) → feature flows (tour start, offline, permissions, audio).</li>
+        <li><strong>Docs:</strong> Usage guidelines for language switches, accessibility (dynamic type/contrast/tap targets), permission copy variants, offline status states.</li>
+      </ul>
+
+      <h2>Challenges & Solutions</h2>
+      <ul>
+        <li><strong>Offline trust gap:</strong> Added download sizing + offline test/status; partial-offline messaging; timestamped content freshness.</li>
+        <li><strong>Permission friction:</strong> Plain-language on-device copy; single well-timed prompt; background opt-in only with stated benefit; no repeated nagging.</li>
+        <li><strong>Audio reliability:</strong> Visible fallback path (studio -> device TTS + highlight/transcript); error messaging; speed controls.</li>
+        <li><strong>Localization clarity:</strong> Translation coverage indicator; terminology swap to “places”; bilingual permission/alert copy checked in JP/FR.</li>
+      </ul>
+
+      <h2>Impact & Results</h2>
+      <ul>
+        <li>Reduced tour start friction in tests (faster time-to-start; higher start rate on first attempt).</li>
+        <li>Higher stated trust in offline after proof flow; fewer permission denials in testing; clearer exit/resume path reduced abandonment.</li>
+        <li>Audio completion improved with visible fallback + transcripts; accessibility compliance improved (dynamic type respected; better contrast/tap targets).</li>
+        <li>Design system alignment reduced rework during engineering refactors (tokens/components reuse).</li>
+      </ul>
+
+      <h2>Learnings & Reflections</h2>
+      <ul>
+        <li><strong>What worked:</strong> Forced-failure scenarios (offline/audio/GPS wobble) during testing surfaced real-world gaps early; plain-language copy moved the needle on permissions.</li>
+        <li><strong>PM/Eng alignment:</strong> Design tokens + facades reduced churn when refactors landed; pairing telemetry schema with UX goals clarified success metrics.</li>
+        <li><strong>Future improvements:</strong> Ship day planner, indoor/entrance hints, crowd/peak-time hints; expand multilingual QA; add production telemetry dashboards and A/B permission copy tests.</li>
+        <li><strong>Personal growth:</strong> Strengthened field testing, accessibility reviews, and privacy-forward UX writing; deeper collaboration with engineering on feasibility for offline/audio flows.</li>
+      </ul>
+
+      <h2>My Contribution & Role</h2>
+      <ul>
+        <li>Led UX research and synthesis; defined personas/journeys; crafted permission/offline/audio flows.</li>
+        <li>Built design system tokens and key components; ran accessibility/localization audits.</li>
+        <li>Partnered with engineering on feasibility for offline, audio fallback, and tour UX changes; provided specs/handoff.</li>
+      </ul>
+
+      <h2>Skills Demonstrated</h2>
+      <ul>
+        <li>Product design (mobile, multilingual, accessibility)</li>
+        <li>UX research & synthesis (moderated/unmoderated, failure-path testing)</li>
+        <li>Design systems (tokens, components, documentation)</li>
+        <li>UX writing (privacy/offline/permission copy)</li>
+      </ul>
+
+     <div class="col-sm-2"></div>
+  </div>
+</div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/load-navbar.js"></script>
+  </body>
+</html>
