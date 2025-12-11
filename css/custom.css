@@ -1,13 +1,89 @@
 /* Custom Alex CSS
 */
 
+:root {
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.375rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: clamp(2.5rem, 5vw, 3.5rem);
+  --space-3xl: clamp(3rem, 8vw, 5rem);
+  --section-gap: clamp(3rem, 6vw, 4.5rem);
+}
+
+@media (max-width: 576px) {
+  :root {
+    --section-gap: clamp(2.25rem, 12vw, 3.75rem);
+  }
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap, var(--space-md));
+}
+
+.stack-sm {
+  --stack-gap: var(--space-sm);
+}
+
+.stack-lg {
+  --stack-gap: var(--space-xl);
+}
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--cluster-gap, var(--space-sm));
+}
+
+.section-block {
+  padding-block: var(--section-gap);
+}
+
+.section-block + .section-block {
+  padding-top: 0;
+}
+
 .bg-light {
     background-color: #ffffff !important;
 }
 
+.container {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.container + .container {
+  margin-top: var(--section-gap);
+}
+
+.container.mt-4 {
+  margin-top: var(--section-gap)!important;
+}
+
+.container.my-5 {
+  margin-top: var(--section-gap)!important;
+  margin-bottom: var(--section-gap)!important;
+}
+
+@media (max-width: 576px) {
+  .container.mt-4 {
+    margin-top: var(--space-lg) !important;
+  }
+
+  .container + .container {
+    margin-top: var(--space-lg) !important;
+  }
+}
+
 /* navbar */
 .navbar {
-  padding: 2rem 0rem;
+  padding: var(--space-xl) 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -15,16 +91,16 @@
 }
 
 .navbar .flex-row {
-  gap: 1.5rem;
+  gap: var(--space-lg);
 }
 
 @media (max-width: 576px) {
   .navbar {
-    padding: 1.5rem 0rem;
+    padding: var(--space-lg) 0;
   }
   
   .navbar .flex-row {
-    gap: 1rem;
+    gap: var(--space-md);
   }
   
   .navbar-brand {
@@ -38,18 +114,18 @@
 
 
 body{
-	background-color: #f8f8f8;
-	line-height: 2rem;
-	color: #505050;
-	font-family: 'Open Sans', sans-serif;
+  background-color: #f8f8f8;
+  line-height: 1.75;
+  color: #505050;
+  font-family: 'Open Sans', sans-serif;
 }
 h1{
   letter-spacing: 0.005rem;
 }
 
 h2{
-	margin-top: 4rem;
-	margin-bottom: 2rem;
+  margin-top: var(--space-3xl);
+  margin-bottom: var(--space-xl);
   letter-spacing: 0.05rem;
 }
 
@@ -57,7 +133,7 @@ h6{
   color: #aaa;
   text-transform: uppercase;
   font-size: 0.8rem;
-  padding-bottom: 2rem;
+  padding-bottom: var(--space-xl);
 }
 
 p{
@@ -69,34 +145,38 @@ span{
 }
 
 .row {
-	margin-top: 2rem;
-	margin-bottom: 2rem;
+	--row-gap-y: var(--space-2xl);
+	--row-gap-x: var(--space-xl);
+	--bs-gutter-y: var(--row-gap-y);
+	--bs-gutter-x: var(--row-gap-x);
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.row + .row {
+  margin-top: var(--space-lg);
 }
 
 @media (max-width: 768px) {
   .row {
-    margin-top: 1.25rem;
-    margin-bottom: 1.25rem;
+    --row-gap-y: var(--space-lg);
+    --row-gap-x: var(--space-md);
+  }
+}
+
+@media (max-width: 576px) {
+  .row {
+    --row-gap-y: var(--space-xs);
   }
 
-  .container.mt-4 {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .col-sm-4.flex-column.pt-3,
-  .col-sm-8.pt-3 {
-    padding-top: 0.75rem;
-  }
-
-  .col-sm-4.flex-column.pt-3:first-child {
-    padding-top: 0;
+  .row > [class*="col-"] {
+    padding-top: 0 !important;
   }
 }
 
 .btn {
-	margin-top: 0rem;
-	margin-bottom: 0rem;
+	margin-top: 0;
+	margin-bottom: 0;
 	border-radius: 2rem;
 }
 .badge{
@@ -109,20 +189,20 @@ span{
 	padding-left: 0;
  	padding-right: 0;
  	height: 5rem;
- 	margin-top: 4rem;
+	margin-top: var(--space-3xl);
 }
 .logo-footer{
 	height: 2rem;
 	width: 2rem;
 	margin-left: 50%;
 	margin-right: 50%;
-	margin-top: 2rem;
+	margin-top: var(--space-xl);
 }
 
 .about-container {
     max-width: 800px; /* Adjust the max width as needed */
     margin: 0 auto; /* Center the container */
-    padding: 0 1.5rem; /* Add padding on both sides */
+    padding: 0 var(--space-lg); /* Add padding on both sides */
 }
 /* Alternating project layout - CSS only */
 .container:nth-of-type(2n+1) .row {
@@ -135,9 +215,16 @@ span{
     flex-direction: row-reverse;
 }
 
-/* On mobile, always show text first, then image */
+/* On mobile, always show image first, then text */
 @media (max-width: 576px) {
+    .container:nth-of-type(2n+1) .row,
     .container:nth-of-type(2n) .row {
-        flex-direction: row;
+        flex-direction: column-reverse !important;
     }
+
+  .row img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
