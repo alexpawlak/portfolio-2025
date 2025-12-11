@@ -1,0 +1,79 @@
+/* Custom Alex CSS
+*/
+
+.bg-light {
+    background-color: #ffffff !important;
+}
+
+/* navbar */
+.navbar {
+  padding: 2rem 0rem;
+}
+
+
+body{
+	background-color: #f8f8f8;
+	line-height: 2rem;
+	color: #505050;
+	font-family: 'Open Sans', sans-serif;
+}
+h1{
+  letter-spacing: 0.005rem;
+}
+
+h2{
+	margin-top: 4rem;
+	margin-bottom: 2rem;
+  letter-spacing: 0.05rem;
+}
+
+h6{
+  color: #aaa;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  padding-bottom: 2rem;
+}
+
+p{
+  letter-spacing: 0.005rem;
+}
+
+span{
+  color: #00aa00;
+}
+
+.row {
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+
+.btn {
+	margin-top: 3rem;
+	margin-bottom: 0rem;
+	border-radius: 2rem;
+}
+.badge{
+	border-radius: 2rem;
+	background-color: #bbb;
+}
+
+.footer{
+	background-color: #eee;
+	padding-left: 0;
+ 	padding-right: 0;
+ 	height: 5rem;
+ 	margin-top: 4rem;
+}
+.logo-footer{
+	height: 2rem;
+	width: 2rem;
+	margin-left: 50%;
+	margin-right: 50%;
+	margin-top: 2rem;
+}
+
+.about-container {
+    max-width: 800px; /* Adjust the max width as needed */
+    margin: 0 auto; /* Center the container */
+    padding: 0 1.5rem; /* Add padding on both sides */
+}
