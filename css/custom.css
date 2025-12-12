@@ -50,6 +50,91 @@
   padding-top: 0;
 }
 
+/* Companies Section */
+.companies-title {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #6c757d;
+  margin-bottom: var(--space-2xl);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.companies-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Mobile: 3 per row */
+  gap: var(--space-xl);
+  align-items: center;
+  justify-items: center;
+}
+
+@media (min-width: 768px) {
+  .companies-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* center items horizontally */
+    align-content: center;   /* center rows vertically within the container */
+    --cell-gap: var(--space-2xl);
+    gap: var(--cell-gap);
+  }
+  /* 5-6-5 repeating rows with exact widths accounting for gap */
+  .companies-grid .company-logo-container {
+    flex: 0 0 calc((100% - 4 * var(--cell-gap)) / 5);
+    max-width: calc((100% - 4 * var(--cell-gap)) / 5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .companies-grid .company-logo-container:nth-child(16n + 6),
+  .companies-grid .company-logo-container:nth-child(16n + 7),
+  .companies-grid .company-logo-container:nth-child(16n + 8),
+  .companies-grid .company-logo-container:nth-child(16n + 9),
+  .companies-grid .company-logo-container:nth-child(16n + 10),
+  .companies-grid .company-logo-container:nth-child(16n + 11) {
+    flex-basis: calc((100% - 5 * var(--cell-gap)) / 6);
+    max-width: calc((100% - 5 * var(--cell-gap)) / 6);
+  }
+}
+
+.company-logo-container {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 140px;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-sm);
+  transition: transform 0.3s ease;
+}
+
+.company-logo-container:hover {
+  transform: translateY(-2px);
+}
+
+.company-logo {
+  max-width: 100%;
+  max-height: 80px;
+  min-width: 60px;
+  min-height: 60px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: grayscale(100%) opacity(0.6);
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+/* Removed size variance per feedback */
+
+.company-logo-container:hover .company-logo {
+  filter: grayscale(0%) opacity(1);
+}
+
+.company-logo:hover {
+  filter: grayscale(0%) opacity(1);
+}
+
 .bg-light {
     background-color: #ffffff !important;
 }
@@ -118,7 +203,7 @@
 
 /* Desktop: brand and subtitle in primary green */
 @media (min-width: 577px) {
-  .navbar .brand-full { color: var(--brand-green); }
+  .navbar .brand-full { color: #000; }
   .navbar .brand-subtitle { color: var(--brand-green); }
 }
 
@@ -156,6 +241,16 @@ body{
 }
 h1{
   letter-spacing: 0.005rem;
+}
+
+/* Add spacing under the hero text before CTA */
+.hero-cta {
+  margin-top: var(--space-xl);
+}
+@media (min-width: 768px) {
+  .hero-cta {
+    margin-top: var(--space-2xl);
+  }
 }
 
 h2{
@@ -239,6 +334,11 @@ body.projects-list .row + .row {
     margin: 0 auto; /* Center the container */
     padding: 0 var(--space-lg); /* Add padding on both sides */
 }
+/* Spacing above photo gallery on Photo Book page */
+.gallery-block {
+  margin-top: var(--space-2xl);
+}
+
 /* Alternating project layout - CSS only */
 body.projects-list .container:nth-of-type(2n+1) .row {
     display: flex;

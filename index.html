@@ -23,8 +23,69 @@
     </div>
     <div class="container">
       <h1>Hello!<br> I am <span>Alexandre Pawlak</span>, a mobile and SaaS-focused UX designer from France. Inspired by data and simplicity, I help businesses transform complex concepts into intuitive, impactful user experiences.</h1>
-      <div class="row">
+      <div class="row hero-cta">
         <div class="col"><a class="btn btn-success" role="button" href="/projects.html">Discover projects</a></div>
+      </div>
+    </div>
+
+    <!-- Companies Section -->
+    <div class="container section-block">
+      <h2 class="companies-title">Trusted by</h2>
+      <div class="companies-grid">
+        <div class="company-logo-container">
+          <img src="/images/logos/deloitte.svg" alt="Deloitte" class="company-logo" data-bs-toggle="tooltip" title="Consulting & Professional Services">
+        </div>
+        <div class="company-logo-container">
+          <img src="/images/logos/orange.svg" alt="Orange" class="company-logo" data-bs-toggle="tooltip" title="Telecommunications">
+        </div>
+        <div class="company-logo-container">
+          <img src="/images/logos/sfr.svg" alt="SFR" class="company-logo" data-bs-toggle="tooltip" title="Telecommunications">
+        </div>
+        <div class="company-logo-container">
+          <img src="/images/logos/alsid.svg" alt="Alsid" class="company-logo" data-bs-toggle="tooltip" title="Cybersecurity">
+        </div>
+        <div class="company-logo-container">
+          <img src="/images/logos/arkema.svg" alt="Arkema" class="company-logo" data-bs-toggle="tooltip" title="Chemicals & Materials">
+        </div>
+        <div class="company-logo-container">
+          <img src="/images/logos/skema.svg" alt="SKEMA Business School" class="company-logo" data-bs-toggle="tooltip" title="Higher Education">
+        </div>
+        <div class="company-logo-container">
+          <img src="/images/logos/rte.svg" alt="RTE" class="company-logo" data-bs-toggle="tooltip" title="Energy & Utilities">
+        </div>
+        <div class="company-logo-container">
+          <img src="/images/logos/grand-paris-express.svg" alt="Grand Paris Express" class="company-logo" data-bs-toggle="tooltip" title="Public Transport & Infrastructure">
+        </div>
+        <div class="company-logo-container">
+          <img src="/images/logos/air-liquide.svg" alt="Air Liquide" class="company-logo" data-bs-toggle="tooltip" title="Industrial Gases & Healthcare">
+        </div>
+        <div class="company-logo-container">
+          <img src="/images/logos/safran.svg" alt="Safran" class="company-logo" data-bs-toggle="tooltip" title="Aerospace & Defense">
+        </div>
+        <div class="company-logo-container">
+          <img src="/images/logos/sagem.svg" alt="Sagem" class="company-logo" data-bs-toggle="tooltip" title="Electronics & Defense">
+        </div>
+        <div class="company-logo-container">
+          <img src="/images/logos/bouygues-immobilier.svg" alt="Bouygues Immobilier" class="company-logo" data-bs-toggle="tooltip" title="Real Estate & Construction">
+        </div>
+        <div class="company-logo-container">
+          <img src="/images/logos/groupe-adp.svg" alt="Groupe ADP" class="company-logo" data-bs-toggle="tooltip" title="Airports & Aviation">
+        </div>
+        <div class="company-logo-container">
+          <img src="/images/logos/sodexo.svg" alt="Sodexo" class="company-logo" data-bs-toggle="tooltip" title="Facilities & Food Services">
+        </div>
+        <div class="company-logo-container">
+          <img src="/images/logos/sephora.svg" alt="Sephora" class="company-logo" data-bs-toggle="tooltip" title="Beauty Retail">
+        </div>
+        <div class="company-logo-container">
+          <img src="/images/logos/merieux.svg" alt="Mérieux" class="company-logo" data-bs-toggle="tooltip" title="Healthcare & Diagnostics">
+        </div>
+        <div class="company-logo-container">
+          <img src="/images/logos/sgs.svg" alt="SGS" class="company-logo" data-bs-toggle="tooltip" title="Testing, Inspection & Certification">
+        </div>
+        <div class="company-logo-container">
+          <img src="/images/logos/enchanted-tools.svg" alt="Enchanted Tools" class="company-logo" data-bs-toggle="tooltip" title="Service Robotics">
+        </div>
       </div>
     </div>
 
@@ -34,5 +95,13 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+          new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+      });
+    </script>
   </body>
 </html>
